@@ -15,7 +15,7 @@ const games = [
     title: "MY GUN LiFE",
     icon: "⚡",
     desc: "Action • Adventure",
-    path: "GAMES/MY%20GUN%20LiFE/index.html"
+    path: "games/my-gun-life/index.html"
   }
 ];
 
