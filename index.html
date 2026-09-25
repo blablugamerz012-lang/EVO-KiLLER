@@ -282,6 +282,63 @@ footer {
   }
 }
 </style>
+  <style>
+#myGunLifeLoading {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #050914 url("loading-screen.png") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 35px 20px;
+  box-sizing: border-box;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+#myGunLifeLoading.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-percent {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  text-shadow: 0 0 12px #000;
+  margin-bottom: 12px;
+}
+
+.loading-bar {
+  width: min(600px, 85vw);
+  height: 14px;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.7);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,150,255,.5);
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,#00aaff,#ffffff);
+  border-radius: inherit;
+  transition: width .12s linear;
+}
+
+.loading-text {
+  margin-top: 12px;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #000;
+}
+</style>
 </head>
 
 <body>
