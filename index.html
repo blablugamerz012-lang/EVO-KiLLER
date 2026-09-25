@@ -30,7 +30,14 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 2000;
+    }
+
+    .logo {
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
     }
 
     .logo img {
@@ -170,6 +177,111 @@
       color: #777;
     }
 
+    /* GAME OVERLAY (iframe player) */
+    #gameOverlay {
+      display: none;
+      position: fixed;
+      top: 70px; /* below header, so header + logo stay visible while playing */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000;
+      z-index: 500;
+    }
+
+    #gameOverlay.open {
+      display: block;
+    }
+
+    #gameOverlay iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* QUIT CONFIRM MODAL */
+    #confirmBackdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #confirmBackdrop.open {
+      display: flex;
+    }
+
+    .confirm-box {
+      background: #fff;
+      border-radius: 16px;
+      width: 92%;
+      max-width: 380px;
+      padding: 26px 22px 22px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .confirm-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .confirm-close:hover {
+      color: #222;
+    }
+
+    .confirm-box p {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 18px 0 22px;
+      color: #202124;
+    }
+
+    .confirm-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .confirm-actions button {
+      flex: 1;
+      padding: 12px 0;
+      border-radius: 10px;
+      border: none;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .btn-yes {
+      background: #1a73e8; /* blue */
+    }
+
+    .btn-yes:hover {
+      background: #1558b0;
+    }
+
+    .btn-no {
+      background: #1db954; /* green */
+    }
+
+    .btn-no:hover {
+      background: #169943;
+    }
+
     /* MOBILE */
     @media (max-width: 700px) {
       header {
@@ -197,6 +309,10 @@
       .game-image {
         height: 115px;
       }
+
+      #gameOverlay {
+        top: 60px;
+      }
     }
   </style>
 </head>
@@ -206,9 +322,9 @@
   <!-- HEADER -->
   <header>
 
-    <div class="logo">
+    <button class="logo" id="logoBtn" aria-label="Home">
       <img src="logo.png" alt="EVO-GAMES HUB">
-    </div>
+    </button>
 
     <div class="search">
       <input
@@ -271,6 +387,24 @@
   </footer>
 
 
+  <!-- GAME OVERLAY -->
+  <div id="gameOverlay">
+    <iframe id="gameFrame" src=""></iframe>
+  </div>
+
+  <!-- QUIT CONFIRM MODAL -->
+  <div id="confirmBackdrop">
+    <div class="confirm-box">
+      <button class="confirm-close" id="confirmCloseBtn" aria-label="Close">✕</button>
+      <p>Do you want to quit the game and go to the home page?</p>
+      <div class="confirm-actions">
+        <button class="btn-yes" id="confirmYesBtn">YES</button>
+        <button class="btn-no" id="confirmNoBtn">NO</button>
+      </div>
+    </div>
+  </div>
+
+
   <script>
 
     const games = [
@@ -300,6 +434,56 @@
 
 
     const grid = document.getElementById("gameGrid");
+    const gameOverlay = document.getElementById("gameOverlay");
+    const gameFrame = document.getElementById("gameFrame");
+    const confirmBackdrop = document.getElementById("confirmBackdrop");
+    const logoBtn = document.getElementById("logoBtn");
+
+    function isGameOpen() {
+      return gameOverlay.classList.contains("open");
+    }
+
+    function openGame(path) {
+      if (path === "#") return;
+      gameFrame.src = path;
+      gameOverlay.classList.add("open");
+    }
+
+    function closeGame() {
+      gameOverlay.classList.remove("open");
+      gameFrame.src = "";
+      confirmBackdrop.classList.remove("open");
+    }
+
+    function showConfirm() {
+      confirmBackdrop.classList.add("open");
+    }
+
+    function hideConfirm() {
+      confirmBackdrop.classList.remove("open");
+    }
+
+    // Logo click: if a game is open, ask for confirmation.
+    // If on the home page already, just refresh.
+    logoBtn.addEventListener("click", () => {
+      if (isGameOpen()) {
+        showConfirm();
+      } else {
+        location.reload();
+      }
+    });
+
+    document.getElementById("confirmYesBtn").addEventListener("click", () => {
+      closeGame();
+    });
+
+    document.getElementById("confirmNoBtn").addEventListener("click", hideConfirm);
+    document.getElementById("confirmCloseBtn").addEventListener("click", hideConfirm);
+
+    // Clicking the dark backdrop (outside the box) also just closes the confirm popup, not the game
+    confirmBackdrop.addEventListener("click", (e) => {
+      if (e.target === confirmBackdrop) hideConfirm();
+    });
 
 
     function showGames(list) {
@@ -323,13 +507,7 @@
           </div>
         `;
 
-        card.onclick = () => {
-
-          if (game.path !== "#") {
-            window.location.href = game.path;
-          }
-
-        };
+        card.onclick = () => openGame(game.path);
 
         grid.appendChild(card);
 
