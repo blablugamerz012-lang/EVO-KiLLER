@@ -500,10 +500,37 @@
     }
 
     function openGame(path) {
-      if (path === "#") return;
-      gameFrame.src = path;
-      gameOverlay.classList.add("open");
+  if (path === "#") return;
+
+  const loadingScreen = document.getElementById("loadingScreen");
+  const loadingProgress = document.getElementById("loadingProgress");
+  const loadingPercent = document.getElementById("loadingPercent");
+
+  loadingScreen.classList.add("show");
+
+  loadingProgress.style.width = "0%";
+  loadingPercent.textContent = "0%";
+
+  let progress = 0;
+
+  const loadingTimer = setInterval(() => {
+    progress += 2;
+
+    loadingProgress.style.width = progress + "%";
+    loadingPercent.textContent = progress + "%";
+
+    if (progress >= 100) {
+      clearInterval(loadingTimer);
+
+      setTimeout(() => {
+        loadingScreen.classList.remove("show");
+
+        gameFrame.src = path;
+        gameOverlay.classList.add("open");
+      }, 300);
     }
+  }, 30);
+}
 
     function closeGame() {
       gameOverlay.classList.remove("open");
