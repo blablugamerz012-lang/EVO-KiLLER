@@ -367,6 +367,112 @@
   font-weight: bold;
 }
   </style>
+  ```html
+<style>
+/* =========================
+   GAME LOADING SCREEN
+   ========================= */
+
+#gameLoadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-box {
+    text-align: center;
+}
+
+/* LOGO ANIMATION */
+.loading-logo {
+    width: 180px;
+    max-width: 60vw;
+    height: auto;
+    animation: loadingLogo 1.4s ease-in-out infinite;
+}
+
+@keyframes loadingLogo {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+
+    50% {
+        transform: scale(1.08) translateY(-8px);
+    }
+}
+
+/* LOADING TEXT */
+.loading-text {
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+/* LOADING BAR */
+.loading-bar {
+    width: 220px;
+    height: 6px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px auto 0;
+}
+
+#loadingProgress {
+    width: 0%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    animation: loadingBar 2s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 70%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+</style>
+```
+
+Aur **Step 1 wale loading screen code** mein logo ki image bhi add karni hai:
+
+```html
+<div id="gameLoadingScreen">
+    <div class="loading-box">
+
+        <img
+            src="Icon/YOUR-LOGO-FILE.png"
+            class="loading-logo"
+            alt="Game Logo"
+        >
+
+        <div class="loading-text">LOADING GAME...</div>
+
+        <div class="loading-bar">
+            <div id="loadingProgress"></div>
+        </div>
+
+    </div>
+</div>
+```
+
+⚠️ **Important:** `YOUR-LOGO-FILE.png` ki jagah tumhare `Icon` folder mein jo **exact logo filename** hai woh lagana hoga.
+
+**Step 3** mein hum actual game loading ke saath isko connect karenge, taake **game load complete hote hi loading screen automatically gayab ho** — fake timer se nahi.
 </head>
 
 <body>
@@ -631,6 +737,15 @@
     showGames(games);
 
   </script>
-
+<!-- GAME LOADING SCREEN -->
+<div id="gameLoadingScreen">
+    <div class="loading-box">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING GAME...</div>
+        <div class="loading-bar">
+            <div id="loadingProgress"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
