@@ -1,324 +1,183 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>EVO-GAMES HUB </title>
+<title>EVO-GAMES HUB</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
 
-    body {
-      background: #f5f6f8;
-      color: #202124;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    /* HEADER */
-    header {
-      height: 70px;
-      background: white;
-      display: flex;
-      align-items: center;
-      padding: 0 35px;
-      gap: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 2000;
-    }
+body {
+  background: #f5f6f8;
+  color: #202124;
+}
 
-    .logo {
+/* HEADER */
+header {
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 0 35px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+
+.logo {
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
-  margin-right: 50px;
 }
-    .logo img {
-      height: 80px;
-      display: block;
-    }
 
-    .search {
-      flex: 1;
-      max-width: 550px;
-      position: relative;
-    }
+.logo img {
+  height: 80px;
+  display: block;
+}
 
-    .search input {
-      width: 100%;
-      height: 45px;
-      border: 0;
-      background: #f0f1f3;
-      border-radius: 25px;
-      padding: 0 20px;
-      font-size: 15px;
-      outline: none;
-    }
+/* HERO */
+.hero {
+  padding: 45px 6%;
+  background: linear-gradient(135deg, #ff3b30, #ff6b35);
+  color: white;
+}
 
-    .menu {
-      margin-left: auto;
-      display: flex;
-      gap: 20px;
-      font-weight: bold;
-    }
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
 
-    .menu a {
-      text-decoration: none;
-      color: #333;
-    }
+.hero p {
+  font-size: 17px;
+}
 
-    /* HERO */
-    .hero {
-      padding: 45px 6%;
-      background: linear-gradient(135deg, #ff3b30, #ff6b35);
-      color: white;
-    }
+/* CATEGORIES */
+.categories {
+  display: flex;
+  gap: 12px;
+  padding: 25px 6%;
+  overflow-x: auto;
+  background: white;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+.category {
+  border: none;
+  background: #f0f1f3;
+  padding: 11px 20px;
+  border-radius: 22px;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+}
 
-    .hero p {
-      font-size: 17px;
-      opacity: 0.95;
-    }
+.category:hover {
+  background: #222;
+  color: white;
+}
 
-    /* CATEGORIES */
-    .categories {
-      display: flex;
-      gap: 12px;
-      padding: 25px 6%;
-      overflow-x: auto;
-      background: white;
-    }
+/* GAMES */
+.games-section {
+  padding: 35px 6%;
+}
 
-    .category {
-      border: none;
-      background: #f0f1f3;
-      padding: 11px 20px;
-      border-radius: 22px;
-      cursor: pointer;
-      font-weight: bold;
-      white-space: nowrap;
-    }
+.games-section h2 {
+  font-size: 27px;
+  margin-bottom: 22px;
+}
 
-    .category:hover {
-      background: #222;
-      color: white;
-    }
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 22px;
+}
 
-    /* GAMES */
-    .games-section {
-      padding: 35px 6%;
-    }
+.game-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
 
-    .games-section h2 {
-      font-size: 27px;
-      margin-bottom: 22px;
-    }
+.game-card:hover {
+  transform: translateY(-5px);
+}
 
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 22px;
-    }
+.game-image {
+  height: 145px;
+  background: #202124;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 55px;
+}
 
-    .game-card {
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
+.game-info {
+  padding: 15px;
+}
 
-    .game-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.14);
-    }
+.game-info h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
 
-    .game-image {
-      height: 145px;
-      background: #202124;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
-    }
+.game-info p {
+  color: #777;
+  font-size: 13px;
+}
 
-    .game-info {
-      padding: 15px;
-    }
+/* FOOTER */
+footer {
+  margin-top: 50px;
+  padding: 30px;
+  text-align: center;
+  background: white;
+  color: #777;
+}
 
-    .game-info h3 {
-      font-size: 17px;
-      margin-bottom: 6px;
-    }
+/* GAME OVERLAY */
+#gameOverlay {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 500;
+}
 
-    .game-info p {
-      color: #777;
-      font-size: 13px;
-    }
+#gameOverlay.open {
+  display: block;
+}
 
-    /* FOOTER */
-    footer {
-      margin-top: 50px;
-      padding: 30px;
-      text-align: center;
-      background: white;
-      color: #777;
-    }
+#gameOverlay iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
-    /* GAME OVERLAY (iframe player) */
-    #gameOverlay {
-      display: none;
-      position: fixed;
-      top: 70px; /* below header, so header + logo stay visible while playing */
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000;
-      z-index: 500;
-    }
+/* =========================
+   GAME LOADING SCREEN
+   ========================= */
 
-    #gameOverlay.open {
-      display: block;
-    }
-
-    #gameOverlay iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* QUIT CONFIRM MODAL */
-    #confirmBackdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 3000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #confirmBackdrop.open {
-      display: flex;
-    }
-
-    .confirm-box {
-      background: #fff;
-      border-radius: 16px;
-      width: 92%;
-      max-width: 380px;
-      padding: 26px 22px 22px;
-      position: relative;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    }
-
-    .confirm-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      background: none;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      color: #888;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .confirm-close:hover {
-      color: #222;
-    }
-
-    .confirm-box p {
-      font-size: 16px;
-      font-weight: 700;
-      margin: 18px 0 22px;
-      color: #202124;
-    }
-
-    .confirm-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .confirm-actions button {
-      flex: 1;
-      padding: 12px 0;
-      border-radius: 10px;
-      border: none;
-      font-weight: 800;
-      font-size: 15px;
-      cursor: pointer;
-      color: #fff;
-    }
-
-    .btn-yes {
-      background: #1a73e8; /* blue */
-    }
-
-    .btn-yes:hover {
-      background: #1558b0;
-    }
-
-    .btn-no {
-      background: #1db954; /* green */
-    }
-
-    .btn-no:hover {
-      background: #169943;
-    }
-
-    /* MOBILE */
-    @media (max-width: 700px) {
-      header {
-        padding: 0 15px;
-        gap: 12px;
-      }
-
-      .logo img {
-        height: 34px;
-      }
-
-      .menu {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 30px;
-      }
-
-      .game-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .game-image {
-        height: 115px;
-      }
-
-      #gameOverlay {
-        top: 60px;
-      }
-    }/* LOADING SCREEN */
 #loadingScreen {
   display: none;
   position: fixed;
   inset: 0;
-  background: #111;
+  background: #000;
   z-index: 10000;
   align-items: center;
   justify-content: center;
@@ -335,417 +194,549 @@
   color: white;
 }
 
+/* LOGO */
 .loading-logo {
-  font-size: 70px;
-  margin-bottom: 15px;
+  width: 180px;
+  max-width: 65vw;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  animation: logoMove 1.4s ease-in-out infinite;
 }
 
-.loading-box h2 {
-  font-size: 25px;
-  margin-bottom: 25px;
+@keyframes logoMove {
+
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.08) translateY(-8px);
+  }
+
 }
 
+/* TEXT */
+.loading-text {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+/* BAR */
 .loading-bar {
-  width: 100%;
-  height: 18px;
+  width: 240px;
+  max-width: 80vw;
+  height: 7px;
   background: #333;
   border-radius: 20px;
   overflow: hidden;
+  margin: auto;
 }
 
 #loadingProgress {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #ff3b30, #ffcc00);
+  background: white;
   border-radius: 20px;
-  transition: width 0.1s linear;
+  transition: width 0.15s linear;
 }
 
-#loadingPercent {
-  margin-top: 12px;
-  font-size: 18px;
+/* QUIT MODAL */
+#confirmBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+}
+
+#confirmBackdrop.open {
+  display: flex;
+}
+
+.confirm-box {
+  background: white;
+  border-radius: 16px;
+  width: 92%;
+  max-width: 380px;
+  padding: 26px 22px 22px;
+  text-align: center;
+}
+
+.confirm-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.confirm-box p {
+  font-size: 16px;
   font-weight: bold;
-}
-  </style>
-  ```html
-<style>
-/* =========================
-   GAME LOADING SCREEN
-   ========================= */
-
-#gameLoadingScreen {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 18px 0 22px;
 }
 
-.loading-box {
-    text-align: center;
+.confirm-actions {
+  display: flex;
+  gap: 12px;
 }
 
-/* LOGO ANIMATION */
-.loading-logo {
-    width: 180px;
-    max-width: 60vw;
-    height: auto;
-    animation: loadingLogo 1.4s ease-in-out infinite;
+.confirm-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-@keyframes loadingLogo {
-    0%, 100% {
-        transform: scale(1) translateY(0);
-    }
-
-    50% {
-        transform: scale(1.08) translateY(-8px);
-    }
+.btn-yes {
+  background: #1a73e8;
 }
 
-/* LOADING TEXT */
-.loading-text {
-    margin-top: 20px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 3px;
+.btn-no {
+  background: #1db954;
 }
 
-/* LOADING BAR */
-.loading-bar {
-    width: 220px;
-    height: 6px;
-    background: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 15px auto 0;
+/* MOBILE */
+@media (max-width: 700px) {
+
+  header {
+    padding: 0 15px;
+  }
+
+  .logo img {
+    height: 55px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .game-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .game-image {
+    height: 115px;
+  }
+
+  #gameOverlay {
+    top: 60px;
+  }
+
 }
 
-#loadingProgress {
-    width: 0%;
-    height: 100%;
-    background: white;
-    border-radius: 10px;
-    animation: loadingBar 2s ease-in-out infinite;
-}
-
-@keyframes loadingBar {
-    0% {
-        width: 0%;
-    }
-
-    50% {
-        width: 70%;
-    }
-
-    100% {
-        width: 100%;
-    }
-}
 </style>
-```
-
-Aur **Step 1 wale loading screen code** mein logo ki image bhi add karni hai:
-
-```html
-<div id="gameLoadingScreen">
-    <div class="loading-box">
-
-        <img
-            src="Icon/YOUR-LOGO-FILE.png"
-            class="loading-logo"
-            alt="Game Logo"
-        >
-
-        <div class="loading-text">LOADING GAME...</div>
-
-        <div class="loading-bar">
-            <div id="loadingProgress"></div>
-        </div>
-
-    </div>
-</div>
-```
-
-⚠️ **Important:** `YOUR-LOGO-FILE.png` ki jagah tumhare `Icon` folder mein jo **exact logo filename** hai woh lagana hoga.
-
-**Step 3** mein hum actual game loading ke saath isko connect karenge, taake **game load complete hote hi loading screen automatically gayab ho** — fake timer se nahi.
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<!-- HEADER -->
+<header>
 
-    <button class="logo" id="logoBtn" aria-label="Home">
-      <img src="logo.png" alt="EVO-GAMES HUB">
-    </button>
-    </div>
-  </header>
+  <button class="logo" id="logoBtn" aria-label="Home">
+    <img src="logo.png" alt="EVO-GAMES HUB">
+  </button>
 
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Play Free Online Games</h1>
-    <p>Discover and play games instantly.</p>
-  </section>
+</header>
 
 
-  <!-- CATEGORIES -->
-  <div class="categories">
+<!-- HERO -->
+<section class="hero">
 
-    <button class="category" onclick="filterGames('all')">
-      🎮 All Games
-    </button>
+  <h1>Play Free Online Games</h1>
 
-    <button class="category" onclick="filterGames('action')">
-      ⚡ Action
-    </button>
+  <p>
+    Discover and play games instantly.
+  </p>
 
-    <button class="category" onclick="filterGames('adventure')">
-      🗺️ Adventure
-    </button>
-
-    <button class="category" onclick="filterGames('arcade')">
-      🕹️ Arcade
-    </button>
-
-  </div>
+</section>
 
 
-  <!-- GAMES -->
-  <section class="games-section">
+<!-- CATEGORIES -->
+<div class="categories">
 
-    <h2>🔥 Popular Games</h2>
+  <button class="category" onclick="filterGames('all')">
+    🎮 All Games
+  </button>
 
-    <div class="game-grid" id="gameGrid"></div>
+  <button class="category" onclick="filterGames('action')">
+    ⚡ Action
+  </button>
 
-  </section>
+  <button class="category" onclick="filterGames('adventure')">
+    🗺️ Adventure
+  </button>
+
+  <button class="category" onclick="filterGames('arcade')">
+    🕹️ Arcade
+  </button>
+
+</div>
 
 
-  <footer>
-    © 2026 EVO-GAMES
-  </footer>
+<!-- GAMES -->
+<section class="games-section">
+
+  <h2>🔥 Popular Games</h2>
+
+  <div class="game-grid" id="gameGrid"></div>
+
+</section>
 
 
-  <!-- GAME OVERLAY -->
-  <!-- LOADING SCREEN -->
+<footer>
+  © 2026 EVO-GAMES
+</footer>
+
+
+<!-- =========================
+     LOADING SCREEN
+     ========================= -->
+
 <div id="loadingScreen">
+
   <div class="loading-box">
-    <div class="loading-logo">🎮</div>
-    <h2>LOADING GAME...</h2>
+
+    <img
+      src="Icon/logo.png"
+      class="loading-logo"
+      alt="EVO-GAMES"
+    >
+
+    <div class="loading-text">
+      LOADING GAME...
+    </div>
 
     <div class="loading-bar">
       <div id="loadingProgress"></div>
     </div>
 
-    <div id="loadingPercent">0%</div>
   </div>
+
 </div>
-  <div id="gameOverlay">
-    <iframe id="gameFrame" src=""></iframe>
-  </div>
 
-  <!-- QUIT CONFIRM MODAL -->
-  <div id="confirmBackdrop">
-    <div class="confirm-box">
-      <button class="confirm-close" id="confirmCloseBtn" aria-label="Close">✕</button>
-      <p>Do you want to quit the game and go to the home page?</p>
-      <div class="confirm-actions">
-        <button class="btn-yes" id="confirmYesBtn">YES</button>
-        <button class="btn-no" id="confirmNoBtn">NO</button>
-      </div>
+
+<!-- GAME OVERLAY -->
+<div id="gameOverlay">
+
+  <iframe
+    id="gameFrame"
+    src=""
+  ></iframe>
+
+</div>
+
+
+<!-- QUIT CONFIRM -->
+<div id="confirmBackdrop">
+
+  <div class="confirm-box">
+
+    <button
+      class="confirm-close"
+      id="confirmCloseBtn"
+    >
+      ✕
+    </button>
+
+    <p>
+      Do you want to quit the game and go to the home page?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button
+        class="btn-yes"
+        id="confirmYesBtn"
+      >
+        YES
+      </button>
+
+      <button
+        class="btn-no"
+        id="confirmNoBtn"
+      >
+        NO
+      </button>
+
     </div>
+
   </div>
 
-
-  <script>
-
-    const games = [
-
-      {
-        name: "MY GUN LiFE",
-        category: "action",
-        icon: "⚡",
-        path: "games/my-gun-life/index.html"
-      },
-         {
-  name: "TIK TAK TOE",
-  category: "arcade",
-  icon: "❌⭕",
-  path: "games/tik-tak-toe/index.html"
-},
-      {
-        name: "Coming Soon",
-        category: "adventure",
-        icon: "🗺️",
-        path: "#"
-      },
-
-      {
-        name: "Coming Soon",
-        category: "arcade",
-        icon: "🕹️",
-        path: "#"
-      }
-
-    ];
+</div>
 
 
-    const grid = document.getElementById("gameGrid");
-    const gameOverlay = document.getElementById("gameOverlay");
-    const gameFrame = document.getElementById("gameFrame");
-    const confirmBackdrop = document.getElementById("confirmBackdrop");
-    const logoBtn = document.getElementById("logoBtn");
+<script>
 
-    function isGameOpen() {
-      return gameOverlay.classList.contains("open");
-    }
+const games = [
 
-    function openGame(path) {
+  {
+    name: "MY GUN LiFE",
+    category: "action",
+    icon: "⚡",
+    path: "games/my-gun-life/index.html"
+  },
+
+  {
+    name: "TIK TAK TOE",
+    category: "arcade",
+    icon: "❌⭕",
+    path: "games/tik-tak-toe/index.html"
+  },
+
+  {
+    name: "Coming Soon",
+    category: "adventure",
+    icon: "🗺️",
+    path: "#"
+  },
+
+  {
+    name: "Coming Soon",
+    category: "arcade",
+    icon: "🕹️",
+    path: "#"
+  }
+
+];
+
+
+const grid =
+  document.getElementById("gameGrid");
+
+const gameOverlay =
+  document.getElementById("gameOverlay");
+
+const gameFrame =
+  document.getElementById("gameFrame");
+
+const loadingScreen =
+  document.getElementById("loadingScreen");
+
+const loadingProgress =
+  document.getElementById("loadingProgress");
+
+const confirmBackdrop =
+  document.getElementById("confirmBackdrop");
+
+const logoBtn =
+  document.getElementById("logoBtn");
+
+
+/* OPEN GAME */
+
+function openGame(path) {
+
   if (path === "#") return;
 
-  const loadingScreen = document.getElementById("loadingScreen");
-  const loadingProgress = document.getElementById("loadingProgress");
-  const loadingPercent = document.getElementById("loadingPercent");
+  /* SHOW LOADING */
 
   loadingScreen.classList.add("show");
 
-  loadingProgress.style.width = "0%";
-  loadingPercent.textContent = "0%";
+  loadingProgress.style.width = "10%";
 
-  let progress = 0;
 
-  const loadingTimer = setInterval(() => {
-    progress += 2;
+  /* LOAD GAME */
 
-    loadingProgress.style.width = progress + "%";
-    loadingPercent.textContent = progress + "%";
+  gameFrame.src = path;
 
-    if (progress >= 100) {
-      clearInterval(loadingTimer);
 
-      setTimeout(() => {
-        loadingScreen.classList.remove("show");
+  /* OPEN GAME OVERLAY */
 
-        gameFrame.src = path;
-        gameOverlay.classList.add("open");
-      }, 300);
-    }
-  }, 30);
+  gameOverlay.classList.add("open");
+
+
+  /*
+     IMPORTANT:
+     Loading screen stays visible
+     until iframe actually finishes loading.
+  */
+
+  gameFrame.onload = function() {
+
+    loadingProgress.style.width = "100%";
+
+    setTimeout(() => {
+
+      loadingScreen.classList.remove("show");
+
+    }, 250);
+
+  };
+
 }
 
-    function closeGame() {
-      gameOverlay.classList.remove("open");
-      gameFrame.src = "";
-      confirmBackdrop.classList.remove("open");
-    }
 
-    function showConfirm() {
-      confirmBackdrop.classList.add("open");
-    }
+/* CLOSE GAME */
 
-    function hideConfirm() {
-      confirmBackdrop.classList.remove("open");
-    }
+function closeGame() {
 
-    // Logo click: if a game is open, ask for confirmation.
-    // If on the home page already, just refresh.
-    logoBtn.addEventListener("click", () => {
-      if (isGameOpen()) {
-        showConfirm();
-      } else {
-        location.reload();
-      }
-    });
+  gameOverlay.classList.remove("open");
 
-    document.getElementById("confirmYesBtn").addEventListener("click", () => {
-      closeGame();
-    });
+  gameFrame.src = "";
 
-    document.getElementById("confirmNoBtn").addEventListener("click", hideConfirm);
-    document.getElementById("confirmCloseBtn").addEventListener("click", hideConfirm);
+  confirmBackdrop.classList.remove("open");
 
-    // Clicking the dark backdrop (outside the box) also just closes the confirm popup, not the game
-    confirmBackdrop.addEventListener("click", (e) => {
-      if (e.target === confirmBackdrop) hideConfirm();
-    });
+}
 
 
-    function showGames(list) {
+/* CHECK GAME */
 
-      grid.innerHTML = "";
+function isGameOpen() {
 
-      list.forEach(game => {
+  return gameOverlay.classList.contains("open");
 
-        const card = document.createElement("div");
-
-        card.className = "game-card";
-
-        card.innerHTML = `
-          <div class="game-image">
-            ${game.icon}
-          </div>
-
-          <div class="game-info">
-            <h3>${game.name}</h3>
-            <p>Play Now</p>
-          </div>
-        `;
-
-        card.onclick = () => openGame(game.path);
-
-        grid.appendChild(card);
-
-      });
-
-    }
+}
 
 
-    function filterGames(category) {
+/* CONFIRM */
 
-      if (category === "all") {
-        showGames(games);
-      } else {
-        showGames(
-          games.filter(game => game.category === category)
-        );
-      }
+function showConfirm() {
 
-    }
+  confirmBackdrop.classList.add("open");
+
+}
 
 
-    function searchGames() {
+function hideConfirm() {
 
-      const search =
-        document.getElementById("searchBox")
-        .value
-        .toLowerCase();
+  confirmBackdrop.classList.remove("open");
 
-      const results = games.filter(game =>
-        game.name.toLowerCase().includes(search)
-      );
+}
 
-      showGames(results);
 
-    }
+/* LOGO */
 
+logoBtn.addEventListener("click", () => {
+
+  if (isGameOpen()) {
+
+    showConfirm();
+
+  } else {
+
+    location.reload();
+
+  }
+
+});
+
+
+/* YES */
+
+document
+  .getElementById("confirmYesBtn")
+  .addEventListener("click", closeGame);
+
+
+/* NO */
+
+document
+  .getElementById("confirmNoBtn")
+  .addEventListener("click", hideConfirm);
+
+
+/* CLOSE */
+
+document
+  .getElementById("confirmCloseBtn")
+  .addEventListener("click", hideConfirm);
+
+
+/* BACKDROP */
+
+confirmBackdrop.addEventListener("click", (e) => {
+
+  if (e.target === confirmBackdrop) {
+
+    hideConfirm();
+
+  }
+
+});
+
+
+/* SHOW GAMES */
+
+function showGames(list) {
+
+  grid.innerHTML = "";
+
+  list.forEach(game => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "game-card";
+
+    card.innerHTML = `
+
+      <div class="game-image">
+        ${game.icon}
+      </div>
+
+      <div class="game-info">
+
+        <h3>
+          ${game.name}
+        </h3>
+
+        <p>
+          Play Now
+        </p>
+
+      </div>
+
+    `;
+
+    card.onclick = () =>
+      openGame(game.path);
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* FILTER */
+
+function filterGames(category) {
+
+  if (category === "all") {
 
     showGames(games);
 
-  </script>
-<!-- GAME LOADING SCREEN -->
-<div id="gameLoadingScreen">
-    <div class="loading-box">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">LOADING GAME...</div>
-        <div class="loading-bar">
-            <div id="loadingProgress"></div>
-        </div>
-    </div>
-</div>
+  } else {
+
+    showGames(
+      games.filter(
+        game => game.category === category
+      )
+    );
+
+  }
+
+}
+
+
+/* START */
+
+showGames(games);
+
+</script>
+
 </body>
 </html>
+```
