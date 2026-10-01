@@ -288,8 +288,12 @@ const musicTracks={
 Object.values(musicTracks).forEach(a=>{a.loop=true;a.volume=0.55});
 const sfxMove=new Audio('sfx_move.mp3');
 const sfxLose=new Audio('sfx_lose.mp3');
+const sfxWin=new Audio('sfx_win.mp3');
+const sfxDraw=new Audio('sfx_draw.mp3');
 sfxMove.volume=0.85;
 sfxLose.volume=0.9;
+sfxWin.volume=0.9;
+sfxDraw.volume=0.9;
 
 function playSfx(audio){
   if(!soundOn)return;
@@ -486,6 +490,7 @@ function afterMove(symbol){
     if(symbol===player){
       statusEl.textContent='YOU WIN!';
       resultEl.textContent='🎉 YOU WIN!';
+      playSfx(sfxWin);
     }else{
       statusEl.textContent='BOT WINS!';
       resultEl.textContent='BOT WINS!';
@@ -498,6 +503,7 @@ function afterMove(symbol){
     gameOver=true; dScore++; updateScore();
     statusEl.textContent='DRAW!';
     resultEl.textContent='DRAW!';
+    playSfx(sfxDraw);
     showReplay();
   }
 }
