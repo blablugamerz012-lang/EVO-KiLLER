@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>EVO-GAMES HUB </title>
+  <title>EVO-GAMES HUB</title>
 
   <style>
     * {
@@ -34,12 +34,13 @@
     }
 
     .logo {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-right: 50px;
-}
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-right: 50px;
+    }
+
     .logo img {
       height: 80px;
       display: block;
@@ -177,11 +178,11 @@
       color: #777;
     }
 
-    /* GAME OVERLAY (iframe player) */
+    /* GAME OVERLAY */
     #gameOverlay {
       display: none;
       position: fixed;
-      top: 70px; /* below header, so header + logo stay visible while playing */
+      top: 70px;
       left: 0;
       right: 0;
       bottom: 0;
@@ -197,6 +198,82 @@
       width: 100%;
       height: 100%;
       border: 0;
+      display: block;
+    }
+
+    /* LOADING SCREEN
+       IMPORTANT:
+       This is hidden by default.
+       It only appears when openGame() is called.
+    */
+    #loadingScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #111;
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #loadingScreen.show {
+      display: flex;
+    }
+
+    .loading-box {
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      color: white;
+    }
+
+    .loading-logo {
+      width: 150px;
+      max-width: 60vw;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      object-fit: contain;
+
+      animation: logoMove 1.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes logoMove {
+      0% {
+        transform: scale(0.95) translateY(0);
+      }
+
+      50% {
+        transform: scale(1.06) translateY(-7px);
+      }
+
+      100% {
+        transform: scale(0.95) translateY(0);
+      }
+    }
+
+    .loading-text {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .loading-bar {
+      width: 100%;
+      height: 18px;
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    #loadingProgress {
+      width: 10%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff3b30, #ffcc00);
+      border-radius: 20px;
+      transition: width 0.3s ease;
     }
 
     /* QUIT CONFIRM MODAL */
@@ -267,7 +344,7 @@
     }
 
     .btn-yes {
-      background: #1a73e8; /* blue */
+      background: #1a73e8;
     }
 
     .btn-yes:hover {
@@ -275,7 +352,7 @@
     }
 
     .btn-no {
-      background: #1db954; /* green */
+      background: #1db954;
     }
 
     .btn-no:hover {
@@ -284,6 +361,7 @@
 
     /* MOBILE */
     @media (max-width: 700px) {
+
       header {
         padding: 0 15px;
         gap: 12px;
@@ -313,59 +391,15 @@
       #gameOverlay {
         top: 60px;
       }
-    }/* LOADING SCREEN */
-#loadingScreen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #111;
-  z-index: 10000;
-  align-items: center;
-  justify-content: center;
-}
 
-#loadingScreen.show {
-  display: flex;
-}
+      .loading-logo {
+        width: 120px;
+      }
 
-.loading-box {
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-  color: white;
-}
-
-.loading-logo {
-  font-size: 70px;
-  margin-bottom: 15px;
-}
-
-.loading-box h2 {
-  font-size: 25px;
-  margin-bottom: 25px;
-}
-
-.loading-bar {
-  width: 100%;
-  height: 18px;
-  background: #333;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-#loadingProgress {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #ff3b30, #ffcc00);
-  border-radius: 20px;
-  transition: width 0.1s linear;
-}
-
-#loadingPercent {
-  margin-top: 12px;
-  font-size: 18px;
-  font-weight: bold;
-}
+      .loading-text {
+        font-size: 21px;
+      }
+    }
   </style>
 </head>
 
@@ -377,7 +411,7 @@
     <button class="logo" id="logoBtn" aria-label="Home">
       <img src="logo.png" alt="EVO-GAMES HUB">
     </button>
-    </div>
+
   </header>
 
 
@@ -425,38 +459,91 @@
   </footer>
 
 
-  <!-- GAME OVERLAY -->
   <!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <div class="loading-box">
-    <div class="loading-logo">🎮</div>
-    <h2>LOADING GAME...</h2>
+  <!--
+       This does NOT show when the website opens.
+       JavaScript adds "show" only after a game is clicked.
+  -->
+  <div id="loadingScreen">
 
-    <div class="loading-bar">
-      <div id="loadingProgress"></div>
+    <div class="loading-box">
+
+      <img
+        src="Icon/logo.png"
+        class="loading-logo"
+        alt="EVO-GAMES"
+      >
+
+      <div class="loading-text">
+        LOADING GAME...
+      </div>
+
+      <div class="loading-bar">
+        <div id="loadingProgress"></div>
+      </div>
+
     </div>
 
-    <div id="loadingPercent">0%</div>
   </div>
-</div>
+
+
+  <!-- GAME OVERLAY -->
   <div id="gameOverlay">
-    <iframe id="gameFrame" src=""></iframe>
+
+    <iframe
+      id="gameFrame"
+      src=""
+      title="Game"
+    ></iframe>
+
   </div>
+
 
   <!-- QUIT CONFIRM MODAL -->
   <div id="confirmBackdrop">
+
     <div class="confirm-box">
-      <button class="confirm-close" id="confirmCloseBtn" aria-label="Close">✕</button>
-      <p>Do you want to quit the game and go to the home page?</p>
+
+      <button
+        class="confirm-close"
+        id="confirmCloseBtn"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+
+      <p>
+        Do you want to quit the game and go to the home page?
+      </p>
+
       <div class="confirm-actions">
-        <button class="btn-yes" id="confirmYesBtn">YES</button>
-        <button class="btn-no" id="confirmNoBtn">NO</button>
+
+        <button
+          class="btn-yes"
+          id="confirmYesBtn"
+        >
+          YES
+        </button>
+
+        <button
+          class="btn-no"
+          id="confirmNoBtn"
+        >
+          NO
+        </button>
+
       </div>
+
     </div>
+
   </div>
 
 
   <script>
+
+    /* =========================
+       GAME LIST
+       ========================= */
 
     const games = [
 
@@ -466,12 +553,14 @@
         icon: "⚡",
         path: "games/my-gun-life/index.html"
       },
-         {
-  name: "TIK TAK TOE",
-  category: "arcade",
-  icon: "❌⭕",
-  path: "games/tik-tak-toe/index.html"
-},
+
+      {
+        name: "TIK TAK TOE",
+        category: "arcade",
+        icon: "❌⭕",
+        path: "games/tik-tak-toe/index.html"
+      },
+
       {
         name: "Coming Soon",
         category: "adventure",
@@ -489,85 +578,217 @@
     ];
 
 
-    const grid = document.getElementById("gameGrid");
-    const gameOverlay = document.getElementById("gameOverlay");
-    const gameFrame = document.getElementById("gameFrame");
-    const confirmBackdrop = document.getElementById("confirmBackdrop");
-    const logoBtn = document.getElementById("logoBtn");
+    /* =========================
+       ELEMENTS
+       ========================= */
+
+    const grid =
+      document.getElementById("gameGrid");
+
+    const gameOverlay =
+      document.getElementById("gameOverlay");
+
+    const gameFrame =
+      document.getElementById("gameFrame");
+
+    const loadingScreen =
+      document.getElementById("loadingScreen");
+
+    const loadingProgress =
+      document.getElementById("loadingProgress");
+
+    const confirmBackdrop =
+      document.getElementById("confirmBackdrop");
+
+    const logoBtn =
+      document.getElementById("logoBtn");
+
+
+    /* =========================
+       GAME OPEN CHECK
+       ========================= */
 
     function isGameOpen() {
       return gameOverlay.classList.contains("open");
     }
 
+
+    /* =========================
+       OPEN GAME
+       ========================= */
+
     function openGame(path) {
-  if (path === "#") return;
 
-  const loadingScreen = document.getElementById("loadingScreen");
-  const loadingProgress = document.getElementById("loadingProgress");
-  const loadingPercent = document.getElementById("loadingPercent");
+      /* Coming Soon cards do nothing */
+      if (path === "#") {
+        return;
+      }
 
-  loadingScreen.classList.add("show");
+      /*
+        Show loading screen ONLY NOW.
 
-  loadingProgress.style.width = "0%";
-  loadingPercent.textContent = "0%";
+        The website itself does NOT call this function
+        when the homepage opens.
+      */
+      loadingScreen.classList.add("show");
 
-  let progress = 0;
+      /*
+        Small initial progress just for visual feedback.
+        This is NOT a fake timer.
+      */
+      loadingProgress.style.width = "10%";
 
-  const loadingTimer = setInterval(() => {
-    progress += 2;
 
-    loadingProgress.style.width = progress + "%";
-    loadingPercent.textContent = progress + "%";
+      /*
+        IMPORTANT:
+        Attach the load event BEFORE changing iframe.src.
 
-    if (progress >= 100) {
-      clearInterval(loadingTimer);
+        This means the browser starts loading the game
+        and we wait for the iframe load event.
+      */
+      gameFrame.onload = function() {
 
-      setTimeout(() => {
-        loadingScreen.classList.remove("show");
+        /*
+          The game document has reached its iframe load event.
+        */
+        loadingProgress.style.width = "100%";
 
-        gameFrame.src = path;
-        gameOverlay.classList.add("open");
-      }, 300);
+        /*
+          Give the progress bar a moment to visually finish.
+        */
+        setTimeout(() => {
+
+          loadingScreen.classList.remove("show");
+
+        }, 250);
+
+      };
+
+
+      /*
+        Open the game area.
+        Loading screen is still above it.
+      */
+      gameOverlay.classList.add("open");
+
+
+      /*
+        NOW load the selected game.
+      */
+      gameFrame.src = path;
+
     }
-  }, 30);
-}
+
+
+    /* =========================
+       CLOSE GAME
+       ========================= */
 
     function closeGame() {
+
       gameOverlay.classList.remove("open");
+
       gameFrame.src = "";
+
       confirmBackdrop.classList.remove("open");
+
+      /*
+        Make sure loading screen is also hidden
+        if the game is closed.
+      */
+      loadingScreen.classList.remove("show");
+
+      loadingProgress.style.width = "10%";
+
     }
+
+
+    /* =========================
+       CONFIRM POPUP
+       ========================= */
 
     function showConfirm() {
+
       confirmBackdrop.classList.add("open");
+
     }
+
 
     function hideConfirm() {
+
       confirmBackdrop.classList.remove("open");
+
     }
 
-    // Logo click: if a game is open, ask for confirmation.
-    // If on the home page already, just refresh.
+
+    /* =========================
+       LOGO BUTTON
+       ========================= */
+
     logoBtn.addEventListener("click", () => {
+
       if (isGameOpen()) {
+
         showConfirm();
+
       } else {
+
         location.reload();
+
       }
+
     });
 
-    document.getElementById("confirmYesBtn").addEventListener("click", () => {
-      closeGame();
-    });
 
-    document.getElementById("confirmNoBtn").addEventListener("click", hideConfirm);
-    document.getElementById("confirmCloseBtn").addEventListener("click", hideConfirm);
+    /* =========================
+       CONFIRM YES
+       ========================= */
 
-    // Clicking the dark backdrop (outside the box) also just closes the confirm popup, not the game
+    document
+      .getElementById("confirmYesBtn")
+      .addEventListener("click", () => {
+
+        closeGame();
+
+      });
+
+
+    /* =========================
+       CONFIRM NO
+       ========================= */
+
+    document
+      .getElementById("confirmNoBtn")
+      .addEventListener("click", hideConfirm);
+
+
+    /* =========================
+       CONFIRM CLOSE
+       ========================= */
+
+    document
+      .getElementById("confirmCloseBtn")
+      .addEventListener("click", hideConfirm);
+
+
+    /* =========================
+       CLICK OUTSIDE CONFIRM BOX
+       ========================= */
+
     confirmBackdrop.addEventListener("click", (e) => {
-      if (e.target === confirmBackdrop) hideConfirm();
+
+      if (e.target === confirmBackdrop) {
+
+        hideConfirm();
+
+      }
+
     });
 
+
+    /* =========================
+       SHOW GAMES
+       ========================= */
 
     function showGames(list) {
 
@@ -575,22 +796,40 @@
 
       list.forEach(game => {
 
-        const card = document.createElement("div");
+        const card =
+          document.createElement("div");
 
         card.className = "game-card";
 
         card.innerHTML = `
+
           <div class="game-image">
             ${game.icon}
           </div>
 
           <div class="game-info">
-            <h3>${game.name}</h3>
-            <p>Play Now</p>
+
+            <h3>
+              ${game.name}
+            </h3>
+
+            <p>
+              Play Now
+            </p>
+
           </div>
+
         `;
 
-        card.onclick = () => openGame(game.path);
+        /*
+          Clicking the card starts the loading screen
+          and then loads the game.
+        */
+        card.onclick = () => {
+
+          openGame(game.path);
+
+        };
 
         grid.appendChild(card);
 
@@ -599,35 +838,69 @@
     }
 
 
+    /* =========================
+       FILTER GAMES
+       ========================= */
+
     function filterGames(category) {
 
       if (category === "all") {
+
         showGames(games);
+
       } else {
+
         showGames(
-          games.filter(game => game.category === category)
+          games.filter(
+            game => game.category === category
+          )
         );
+
       }
 
     }
 
 
+    /* =========================
+       SEARCH
+       ========================= */
+
     function searchGames() {
 
-      const search =
-        document.getElementById("searchBox")
-        .value
-        .toLowerCase();
+      const searchBox =
+        document.getElementById("searchBox");
 
-      const results = games.filter(game =>
-        game.name.toLowerCase().includes(search)
-      );
+      if (!searchBox) {
+        return;
+      }
+
+      const search =
+        searchBox.value.toLowerCase();
+
+      const results =
+        games.filter(game =>
+          game.name.toLowerCase().includes(search)
+        );
 
       showGames(results);
 
     }
 
 
+    /* =========================
+       INITIAL HOMEPAGE
+       ========================= */
+
+    /*
+      This only creates the game cards.
+
+      IMPORTANT:
+      There is NO loadingScreen.classList.add("show")
+      here.
+
+      Therefore the website itself does NOT show
+      the game loading screen on startup.
+    */
     showGames(games);
 
   </script>
