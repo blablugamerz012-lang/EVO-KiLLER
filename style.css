@@ -68,8 +68,8 @@ header {
 }
 
 .logo img {
-  width: 250px;
-  height: 95px;
+  width: 380px;
+  height: 105px;
 
   object-fit: contain;
 
@@ -452,8 +452,8 @@ footer {
   }
 
   .logo img {
-    width: 160px;
-    height: 72px;
+    width: 250px;
+    height: 78px;
   }
 
   .hero {
@@ -492,8 +492,8 @@ footer {
 @media (max-width: 400px) {
 
   .logo img {
-    width: 140px;
-    height: 65px;
+    width: 220px;
+    height: 70px;
   }
 
   .game-grid {
