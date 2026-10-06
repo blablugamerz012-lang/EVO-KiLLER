@@ -33,7 +33,7 @@ body {
 ========================= */
 
 header {
-  height: 105px;
+  height: 135px;
   width: 100%;
   background: #ffffff;
 
@@ -68,8 +68,8 @@ header {
 }
 
 .logo img {
-  width: 380px;
-  height: 105px;
+  width: 480px;
+  height: 130px;
 
   object-fit: contain;
 
@@ -446,14 +446,14 @@ footer {
 @media (max-width: 700px) {
 
   header {
-    height: 80px;
+    height: 100px;
 
     padding: 0 15px;
   }
 
   .logo img {
-    width: 250px;
-    height: 78px;
+    width: 300px;
+    height: 94px;
   }
 
   .hero {
@@ -492,8 +492,8 @@ footer {
 @media (max-width: 400px) {
 
   .logo img {
-    width: 220px;
-    height: 70px;
+    width: 270px;
+    height: 88px;
   }
 
   .game-grid {
