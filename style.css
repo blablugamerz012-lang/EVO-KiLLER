@@ -51,7 +51,8 @@ header {
 }
 
 .logo {
-  width: auto;
+  width: 600px;
+  max-width: 78vw;
   height: 100%;
 
   cursor: pointer;
@@ -68,7 +69,8 @@ header {
 }
 
 .logo img {
-  width: 480px;
+  width: 600px;
+  max-width: 100%;
   height: 130px;
 
   object-fit: contain;
@@ -451,8 +453,13 @@ footer {
     padding: 0 15px;
   }
 
+  .logo {
+    width: 380px;
+    max-width: 90vw;
+  }
+
   .logo img {
-    width: 300px;
+    width: 380px;
     height: 94px;
   }
 
@@ -491,8 +498,13 @@ footer {
 
 @media (max-width: 400px) {
 
+  .logo {
+    width: 330px;
+    max-width: 92vw;
+  }
+
   .logo img {
-    width: 270px;
+    width: 330px;
     height: 88px;
   }
 
