@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>EVO-GAMES HUB</title>
-  <link rel="icon" type="image/png" href="Icon/logo.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- 
+  <link rel="icon" type="image/png" href="icon/logo.png">
+
   <style>
     * {
       box-sizing: border-box;
@@ -38,14 +36,20 @@
     }
 
     .logo {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-right: 50px;
-}
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-right: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* BIG LOGO */
     .logo img {
-      height: 80px;
+      width: 150px;
+      height: 60px;
+      object-fit: contain;
       display: block;
     }
 
@@ -181,11 +185,11 @@
       color: #777;
     }
 
-    /* GAME OVERLAY (iframe player) */
+    /* GAME OVERLAY */
     #gameOverlay {
       display: none;
       position: fixed;
-      top: 70px; /* below header, so header + logo stay visible while playing */
+      top: 70px;
       left: 0;
       right: 0;
       bottom: 0;
@@ -271,7 +275,7 @@
     }
 
     .btn-yes {
-      background: #1a73e8; /* blue */
+      background: #1a73e8;
     }
 
     .btn-yes:hover {
@@ -279,7 +283,7 @@
     }
 
     .btn-no {
-      background: #1db954; /* green */
+      background: #1db954;
     }
 
     .btn-no:hover {
@@ -293,8 +297,13 @@
         gap: 12px;
       }
 
+      .logo {
+        margin-right: 0;
+      }
+
       .logo img {
-        height: 34px;
+        width: 105px;
+        height: 50px;
       }
 
       .menu {
@@ -317,59 +326,61 @@
       #gameOverlay {
         top: 60px;
       }
-    }/* LOADING SCREEN */
-#loadingScreen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #111;
-  z-index: 10000;
-  align-items: center;
-  justify-content: center;
-}
+    }
 
-#loadingScreen.show {
-  display: flex;
-}
+    /* LOADING SCREEN */
+    #loadingScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #111;
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
 
-.loading-box {
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-  color: white;
-}
+    #loadingScreen.show {
+      display: flex;
+    }
 
-.loading-logo {
-  font-size: 70px;
-  margin-bottom: 15px;
-}
+    .loading-box {
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      color: white;
+    }
 
-.loading-box h2 {
-  font-size: 25px;
-  margin-bottom: 25px;
-}
+    .loading-logo {
+      font-size: 70px;
+      margin-bottom: 15px;
+    }
 
-.loading-bar {
-  width: 100%;
-  height: 18px;
-  background: #333;
-  border-radius: 20px;
-  overflow: hidden;
-}
+    .loading-box h2 {
+      font-size: 25px;
+      margin-bottom: 25px;
+    }
 
-#loadingProgress {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #ff3b30, #ffcc00);
-  border-radius: 20px;
-  transition: width 0.1s linear;
-}
+    .loading-bar {
+      width: 100%;
+      height: 18px;
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+    }
 
-#loadingPercent {
-  margin-top: 12px;
-  font-size: 18px;
-  font-weight: bold;
-}
+    #loadingProgress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff3b30, #ffcc00);
+      border-radius: 20px;
+      transition: width 0.1s linear;
+    }
+
+    #loadingPercent {
+      margin-top: 12px;
+      font-size: 18px;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -377,11 +388,9 @@
 
   <!-- HEADER -->
   <header>
-
     <button class="logo" id="logoBtn" aria-label="Home">
       <img src="icon/logo.png" alt="EVO-GAMES HUB">
     </button>
-    </div>
   </header>
 
 
@@ -429,34 +438,64 @@
   </footer>
 
 
-  <!-- GAME OVERLAY -->
   <!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <div class="loading-box">
-    <div class="loading-logo">🎮</div>
-    <h2>LOADING GAME...</h2>
+  <div id="loadingScreen">
+    <div class="loading-box">
 
-    <div class="loading-bar">
-      <div id="loadingProgress"></div>
+      <div class="loading-logo">🎮</div>
+
+      <h2>LOADING GAME...</h2>
+
+      <div class="loading-bar">
+        <div id="loadingProgress"></div>
+      </div>
+
+      <div id="loadingPercent">0%</div>
+
     </div>
-
-    <div id="loadingPercent">0%</div>
   </div>
-</div>
+
+
+  <!-- GAME OVERLAY -->
   <div id="gameOverlay">
     <iframe id="gameFrame" src=""></iframe>
   </div>
 
+
   <!-- QUIT CONFIRM MODAL -->
   <div id="confirmBackdrop">
+
     <div class="confirm-box">
-      <button class="confirm-close" id="confirmCloseBtn" aria-label="Close">✕</button>
-      <p>Do you want to quit the game and go to the home page?</p>
+
+      <button
+        class="confirm-close"
+        id="confirmCloseBtn"
+        aria-label="Close">
+        ✕
+      </button>
+
+      <p>
+        Do you want to quit the game and go to the home page?
+      </p>
+
       <div class="confirm-actions">
-        <button class="btn-yes" id="confirmYesBtn">YES</button>
-        <button class="btn-no" id="confirmNoBtn">NO</button>
+
+        <button
+          class="btn-yes"
+          id="confirmYesBtn">
+          YES
+        </button>
+
+        <button
+          class="btn-no"
+          id="confirmNoBtn">
+          NO
+        </button>
+
       </div>
+
     </div>
+
   </div>
 
 
@@ -470,17 +509,21 @@
         icon: "⚡",
         path: "games/my-gun-life/index.html"
       },
-         {
-  name: "TIK TAK TOE",
-  category: "arcade",
-  icon: "❌⭕",
-  path: "games/tik-tak-toe/index.html"
-},{
-  name: "Evo-Eater",
-  category: "action",
-  icon: "🦅",
-  path: "games/evoeater/index.html"
-},
+
+      {
+        name: "TIK TAK TOE",
+        category: "arcade",
+        icon: "❌⭕",
+        path: "games/tik-tak-toe/index.html"
+      },
+
+      {
+        name: "Evo-Eater",
+        category: "action",
+        icon: "🦅",
+        path: "games/evoeater/index.html"
+      },
+
       {
         name: "Coming Soon",
         category: "adventure",
@@ -504,50 +547,89 @@
     const confirmBackdrop = document.getElementById("confirmBackdrop");
     const logoBtn = document.getElementById("logoBtn");
 
+
     function isGameOpen() {
       return gameOverlay.classList.contains("open");
     }
 
+
     function openGame(path) {
+
       if (path === "#") return;
+
       gameFrame.src = path;
       gameOverlay.classList.add("open");
+
     }
 
+
     function closeGame() {
+
       gameOverlay.classList.remove("open");
       gameFrame.src = "";
       confirmBackdrop.classList.remove("open");
+
     }
+
 
     function showConfirm() {
+
       confirmBackdrop.classList.add("open");
+
     }
+
 
     function hideConfirm() {
+
       confirmBackdrop.classList.remove("open");
+
     }
 
-    // Logo click: if a game is open, ask for confirmation.
-    // If on the home page already, just refresh.
+
+    // Logo click
     logoBtn.addEventListener("click", () => {
+
       if (isGameOpen()) {
+
         showConfirm();
+
       } else {
+
         location.reload();
+
       }
+
     });
 
-    document.getElementById("confirmYesBtn").addEventListener("click", () => {
-      closeGame();
-    });
 
-    document.getElementById("confirmNoBtn").addEventListener("click", hideConfirm);
-    document.getElementById("confirmCloseBtn").addEventListener("click", hideConfirm);
+    document
+      .getElementById("confirmYesBtn")
+      .addEventListener("click", () => {
 
-    // Clicking the dark backdrop (outside the box) also just closes the confirm popup, not the game
+        closeGame();
+
+      });
+
+
+    document
+      .getElementById("confirmNoBtn")
+      .addEventListener("click", hideConfirm);
+
+
+    document
+      .getElementById("confirmCloseBtn")
+      .addEventListener("click", hideConfirm);
+
+
+    // Clicking outside confirmation box
     confirmBackdrop.addEventListener("click", (e) => {
-      if (e.target === confirmBackdrop) hideConfirm();
+
+      if (e.target === confirmBackdrop) {
+
+        hideConfirm();
+
+      }
+
     });
 
 
@@ -562,6 +644,7 @@
         card.className = "game-card";
 
         card.innerHTML = `
+
           <div class="game-image">
             ${game.icon}
           </div>
@@ -570,6 +653,7 @@
             <h3>${game.name}</h3>
             <p>Play Now</p>
           </div>
+
         `;
 
         card.onclick = () => openGame(game.path);
@@ -584,11 +668,15 @@
     function filterGames(category) {
 
       if (category === "all") {
+
         showGames(games);
+
       } else {
+
         showGames(
           games.filter(game => game.category === category)
         );
+
       }
 
     }
