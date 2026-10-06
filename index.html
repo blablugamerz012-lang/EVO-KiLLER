@@ -6,7 +6,7 @@
 
   <title>EVO-GAMES HUB</title>
 
-  <link rel="icon" type="image/png" href="icon/logo.png">
+  <link rel="icon" type="image/png" href="icon/icon.png">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,10 +16,9 @@
   <!-- HEADER -->
   <header>
     <button class="logo" id="logoBtn" aria-label="Home">
-      <img src="./icon/logo.png" alt="EVO-GAMES HUB">
+      <img src="./icon/icon.png" alt="EVO-GAMES HUB">
     </button>
   </header>
-
 
   <!-- HERO -->
   <section class="hero">
@@ -27,100 +26,43 @@
     <p>Discover and play games instantly.</p>
   </section>
 
-
   <!-- CATEGORIES -->
   <div class="categories">
-
-    <button class="category" onclick="filterGames('all')">
-      🎮 All Games
-    </button>
-
-    <button class="category" onclick="filterGames('action')">
-      ⚡ Action
-    </button>
-
-    <button class="category" onclick="filterGames('adventure')">
-      🗺️ Adventure
-    </button>
-
-    <button class="category" onclick="filterGames('arcade')">
-      🕹️ Arcade
-    </button>
-
+    <button class="category" onclick="filterGames('all')">🎮 All Games</button>
+    <button class="category" onclick="filterGames('action')">⚡ Action</button>
+    <button class="category" onclick="filterGames('adventure')">🗺️ Adventure</button>
+    <button class="category" onclick="filterGames('arcade')">🕹️ Arcade</button>
   </div>
-
 
   <!-- GAMES -->
   <main class="games-section">
-
     <h2>🔥 Popular Games</h2>
-
     <div class="game-grid" id="gameGrid"></div>
-
   </main>
-
 
   <!-- FOOTER -->
   <footer>
     © 2026 EVO-GAMES
   </footer>
 
-
   <!-- GAME OVERLAY -->
   <div id="gameOverlay">
-
-    <button id="gameCloseBtn" aria-label="Close Game">
-      ✕
-    </button>
-
-    <iframe
-      id="gameFrame"
-      src=""
-      title="Game"
-      allowfullscreen>
-    </iframe>
-
+    <button id="gameCloseBtn" aria-label="Close Game">✕</button>
+    <iframe id="gameFrame" src="" title="Game" allowfullscreen></iframe>
   </div>
-
 
   <!-- QUIT CONFIRM MODAL -->
   <div id="confirmBackdrop">
-
     <div class="confirm-box">
-
-      <button
-        class="confirm-close"
-        id="confirmCloseBtn"
-        aria-label="Close">
-        ✕
-      </button>
-
-      <p>
-        Do you want to quit the game and go to the home page?
-      </p>
-
+      <button class="confirm-close" id="confirmCloseBtn" aria-label="Close">✕</button>
+      <p>Do you want to quit the game and go to the home page?</p>
       <div class="confirm-actions">
-
-        <button
-          class="btn-yes"
-          id="confirmYesBtn">
-          YES
-        </button>
-
-        <button
-          class="btn-no"
-          id="confirmNoBtn">
-          NO
-        </button>
-
+        <button class="btn-yes" id="confirmYesBtn">YES</button>
+        <button class="btn-no" id="confirmNoBtn">NO</button>
       </div>
-
     </div>
-
   </div>
 
-
   <script src="script.js"></script>
-
 </body>
 </html>
